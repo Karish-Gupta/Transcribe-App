@@ -8,7 +8,7 @@ model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny")
 
 model.eval()
 
-# Load audio as mono and resample to 16kHz
+# Load audio as mono waveform (1d array) and resample to 16kHz
 audio, sr = librosa.load("data/test_audio.wav", sr=16000, mono=True)
 
 # Convert to tensor and add batch dimension
