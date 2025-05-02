@@ -1,0 +1,19 @@
+Transcribe App: CS4518 Final Project
+
+Karish Gupta - kagupta@wpi.edu
+Utku Yakar - umyakar@wpi.edu
+
+How to run cloud inference:
+
+- Make sure there is a folder called "uploads" under the directory server_model
+- Run python transcription_model_server.py
+- Ensure this is running before the app starts sending queries
+- Start up the Transcribe app and set the inference device to Cloud
+- Press the the microphone button to start recording and press again to stop
+- The recording will be sent to the server and the response will be displayed in the app
+
+Enable microphone on emulator:
+
+- Ensure that the emulator is using the device microphone
+- Use a new device such as a Pixel 9 Pro and click the three dots for extra settings
+- Go to microphone and enable host device microphone option
