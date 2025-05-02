@@ -4,6 +4,7 @@ import torch
 import signal, sys
 from transformers import WhisperProcessor, WhisperForConditionalGeneration
 import librosa
+import traceback
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -32,10 +33,10 @@ def predict():
         audio, sr = librosa.load(f"uploads/{file.filename}", sr=16000, mono=True)
 
         # Convert to tensor and add batch dimension
-        input_tensor = torch.tensor(audio)
+        # input_tensor = torch.tensor(audio)
 
         # Preprocess
-        inputs = processor(input_tensor, sampling_rate=16000, return_tensors="pt")
+        inputs = processor(audio, sampling_rate=16000, return_tensors="pt")
 
         # Generate transcription 
         with torch.no_grad():
@@ -45,9 +46,10 @@ def predict():
         transcription = processor.batch_decode(predicted_ids, skip_special_tokens=True)[0]
 
         # The API now returns predicted transcription
-        return jsonify({transcription})  # HTTP 200
+        return jsonify({"transcription": transcription})  # HTTP 200
 
     except Exception as e:
+        traceback.print_exc()  # Debug
         return jsonify({"error": str(e)}), 500
 
 def handle_exit(signal, frame):
