@@ -1,4 +1,4 @@
-package com.google.aiedge.examples.imageclassification
+package com.google.aiedge.examples.transcription
 
 import org.junit.Assert
 import org.junit.Test

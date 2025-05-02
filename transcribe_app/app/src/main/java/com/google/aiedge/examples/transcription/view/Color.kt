@@ -1,4 +1,4 @@
-package com.google.aiedge.examples.imageclassification.view
+package com.google.aiedge.examples.transcription.view
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.google.aiedge.examples.imageclassification.view
+package com.google.aiedge.examples.transcription.view
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

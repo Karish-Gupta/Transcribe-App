@@ -1,4 +1,4 @@
-package com.google.aiedge.examples.imageclassification
+package com.google.aiedge.examples.transcription
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

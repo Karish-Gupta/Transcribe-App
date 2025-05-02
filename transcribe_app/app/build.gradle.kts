@@ -55,6 +55,7 @@ project.ext.set("ASSET_DIR", "$projectDir/src/main/assets")
 apply(from = "download_model.gradle")
 
 dependencies {
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -67,10 +68,6 @@ dependencies {
     implementation(libs.litert)
     implementation(libs.litert.support)
     implementation(libs.litert.metadata)
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.view)
-    implementation(libs.androidx.camera.camera2)
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     testImplementation(libs.junit)

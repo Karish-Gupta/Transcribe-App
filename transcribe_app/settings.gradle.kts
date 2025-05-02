@@ -11,6 +11,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -19,6 +20,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Image Classification"
+// Set the root project name (can be anything, just for Gradle UI)
+rootProject.name = "TranscriptionApp"
+
+// Include your app module
 include(":app")
- 
