@@ -17,6 +17,7 @@
 package com.google.aiedge.examples.transcription
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -61,7 +62,7 @@ class MainViewModel() : ViewModel() {
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        UiState(currentText = "")
+        UiState(currentText = currentText.value, setting = setting.value, errorMessage = errorMessage.value?.message)
     )
 
     fun setInferenceDevice(device: InferenceDevice) {
@@ -74,8 +75,11 @@ class MainViewModel() : ViewModel() {
             viewModelScope.launch {
                 try {
                     val result = cloudInference.sendAudioFile(file)
+
+                    Log.d("MainViewModel", "Result received: $result")
                     currentText.value = result
                 } catch (e: Exception) {
+                    Log.e("MainViewModel", "Error has occurred", e) // Log the actual exception
                     errorMessage.value = e
                 }
             }

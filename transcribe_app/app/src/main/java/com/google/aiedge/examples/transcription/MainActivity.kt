@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Text(
                     text = "Transcribe",
-                    fontSize = 24.sp,
+                    fontSize = 40.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
                 )
@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
                 Column(modifier = Modifier.verticalScroll(scrollState)) {
                     Text(
                         text = uiState.currentText,
-                        fontSize = 16.sp,
+                        fontSize = 24.sp,
                         color = Color.Black
                     )
                 }
@@ -193,7 +193,7 @@ class MainActivity : ComponentActivity() {
             Column {
                 Text(
                     text = "Inference Mode:",
-                    fontSize = 14.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Box(
