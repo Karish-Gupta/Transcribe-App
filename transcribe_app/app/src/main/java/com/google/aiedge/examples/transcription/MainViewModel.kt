@@ -22,17 +22,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.File
+
 
 
 class MainViewModel() : ViewModel() {
@@ -96,60 +93,6 @@ enum class InferenceDevice {
 }
 
 
-
-
-//    fun sendAudioToServer(file: File) {
-//        viewModelScope.launch {
-//            try {
-//                val response = audioApi.sendAudio(file) // Replace with your API call
-//                uiState.update {
-//                    it.copy(transcription = response.text)
-//                }
-//            } catch (e: Exception) {
-//                _uiState.update {
-//                    it.copy(errorMessage = "Failed to transcribe audio.")
-//                }
-//            }
-//        }
-//    }
-
-
-//    private var lastClassificationTime = 0L
-//    private val classificationIntervalMs = 500L // 1/2 second between each request sent
-//    fun classify(file: File) {
-//        // Implemented request throttling to ensure we do not flood the server with requests
-//
-//        if (setting.value.inferenceDevice == TranscriptionHelper.InferenceDevice.Cloud) {
-//            val currentTime = System.currentTimeMillis()
-//            if (currentTime - lastClassificationTime >= classificationIntervalMs) {
-//                lastClassificationTime = currentTime
-//
-//                transcriptionJob = viewModelScope.launch {
-//                    try {
-//                        val response = audioApi.sendAudio(file) // Replace with your API call
-//                        _uiState.update {
-//                            it.copy(transcription = response.text)
-//                        }
-//                    } catch (e: Exception) {
-//                        _uiState.update {
-//                            it.copy(errorMessage = "Failed to transcribe audio.")
-//                        }
-//                    }
-//                }
-//            } else {
-//                // Skip classification to avoid flooding server
-//            }
-//        } else{
-//            // Otherwise run on-device classification
-//                transcriptionJob = viewModelScope.launch {
-////                    transcriptionHelper.classify(
-////                        imageProxy.toBitmap(),
-////                        imageProxy.imageInfo.rotationDegrees,
-////                    )
-////                    imageProxy.close()
-//                }
-//        }
-//    }
 
 
 

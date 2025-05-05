@@ -29,5 +29,5 @@ class UiState(
 // Setting class that keeps all model/inference-related settings saved, initially set to default
 @Immutable
 data class Setting(
-    val inferenceDevice: InferenceDevice = InferenceDevice.OnDevice
+    val inferenceDevice: InferenceDevice = InferenceDevice.Cloud
 )

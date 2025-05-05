@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Card
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
@@ -96,56 +97,48 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun Header() {
         TopAppBar(
-            backgroundColor = Color.LightGray,
-            elevation = 8.dp
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
+            title = {
                 Text(
                     text = "Transcribe",
-                    fontSize = 40.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier.fillMaxWidth(),
                 )
-            }
-        }
+            },
+            backgroundColor = MaterialTheme.colors.primary,
+            elevation = 6.dp
+        )
     }
+
 
     // Text generation section
     @Composable
-    fun TranscriptionDisplay(
-        uiState: UiState,
-        modifier: Modifier = Modifier,
-    ) {
-        Column(modifier = modifier.fillMaxWidth()) {
-            // Scrollable top section with generated text
-            Box(
+    fun TranscriptionDisplay(uiState: UiState, modifier: Modifier = Modifier) {
+        Column(modifier = modifier.padding(16.dp)) {
+            Card(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
+                    .fillMaxSize()
                     .weight(1f)
-                    .padding(16.dp)
+                    .background(MaterialTheme.colors.surface)
             ) {
                 val scrollState = rememberScrollState()
-                Column(modifier = Modifier.verticalScroll(scrollState)) {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(scrollState)
+                        .padding(16.dp)
+                ) {
                     Text(
                         text = uiState.currentText,
-                        fontSize = 24.sp,
-                        color = Color.Black
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.onSurface
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(Color.LightGray)
-            )
         }
     }
+
 
 
     // Organize control panel (bottom half of screen
@@ -172,10 +165,9 @@ class MainActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(2.dp))
 
             // Inference UI component
-            InferenceDevice(onInferenceDeviceSelected = {
-                onInferenceDeviceSelected(it) // inference callback
-            })
-            Spacer(modifier = Modifier.height(8.dp))
+//            InferenceDevice(onInferenceDeviceSelected = {
+//                onInferenceDeviceSelected(it) // inference callback
+//            })
         }
     }
 

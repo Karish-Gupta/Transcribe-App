@@ -135,34 +135,33 @@ fun MicrophoneButton(onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally // Centers content horizontally
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
             onClick = {
-                isClicked = !isClicked // Toggle the state
+                isClicked = !isClicked
                 onClick()
             },
-            modifier = Modifier
-                .size(80.dp)
-                .clip(CircleShape),
+            modifier = Modifier.size(80.dp),
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = if (isClicked) Color.Red else Color.LightGray
-            )
+                backgroundColor = if (isClicked) MaterialTheme.colors.secondary else MaterialTheme.colors.primary
+            ),
+            elevation = ButtonDefaults.elevation(8.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.Mic,
                 contentDescription = "Microphone",
-                tint = Color.Black,
+                tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
             )
         }
 
         Spacer(modifier = Modifier.height(12.dp))
-
         AudioFeedbackDisplay(
             isRecording = isClicked,
-            volumeLevel = 0.6f // Replace with actual mic input later
+            volumeLevel = 0.6f
         )
     }
 }
+
