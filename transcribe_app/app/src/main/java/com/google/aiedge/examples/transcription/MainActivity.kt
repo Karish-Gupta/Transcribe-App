@@ -46,6 +46,11 @@ import com.google.aiedge.examples.transcription.view.ApplicationTheme
 import com.google.aiedge.examples.transcription.view.AudioScreen
 import java.io.File
 import kotlin.random.Random
+import android.content.Intent
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.History
 
 
 class MainActivity : ComponentActivity() {
@@ -105,9 +110,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth(),
                 )
             },
+            actions = {
+                IconButton(onClick = {
+                    startActivity(
+                        Intent(this@MainActivity, HistoryActivity::class.java)
+                    )
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.History,
+                        contentDescription = "History"
+                    )
+                }
+            },
             backgroundColor = MaterialTheme.colors.primary,
             elevation = 6.dp
         )
+
     }
 
 

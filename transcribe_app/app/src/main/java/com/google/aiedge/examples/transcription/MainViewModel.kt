@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.google.aiedge.examples.transcription.data.HistoryRepository
+import com.google.aiedge.examples.transcription.data.TranscriptionDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -30,14 +32,20 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.File
 
-
-
-class MainViewModel() : ViewModel() {
+class MainViewModel(
+    private val repo: HistoryRepository
+) : ViewModel() {
 
     companion object {
         fun getFactory(context: Context) = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-                return MainViewModel() as T
+            override fun <T : ViewModel> create(
+                modelClass: Class<T>,
+                extras: CreationExtras
+            ): T {
+                val db = TranscriptionDatabase.get(context)
+                val repository = HistoryRepository(db.dao())
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(repository) as T
             }
         }
     }
@@ -59,7 +67,11 @@ class MainViewModel() : ViewModel() {
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        UiState(currentText = currentText.value, setting = setting.value, errorMessage = errorMessage.value?.message)
+        UiState(
+            currentText = currentText.value,
+            setting = setting.value,
+            errorMessage = errorMessage.value?.message
+        )
     )
 
     fun setInferenceDevice(device: InferenceDevice) {
@@ -68,15 +80,15 @@ class MainViewModel() : ViewModel() {
 
     fun handleRecordedAudio(file: File) {
         if (setting.value.inferenceDevice == InferenceDevice.Cloud) {
-            var cloudInference = CloudBasedInference()
+            val cloudInference = CloudBasedInference()
             viewModelScope.launch {
                 try {
                     val result = cloudInference.sendAudioFile(file)
-
                     Log.d("MainViewModel", "Result received: $result")
                     currentText.value = result
+                    repo.add(result)
                 } catch (e: Exception) {
-                    Log.e("MainViewModel", "Error has occurred", e) // Log the actual exception
+                    Log.e("MainViewModel", "Error has occurred", e)
                     errorMessage.value = e
                 }
             }
@@ -91,8 +103,3 @@ class MainViewModel() : ViewModel() {
 enum class InferenceDevice {
     OnDevice, Cloud
 }
-
-
-
-
-
