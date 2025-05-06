@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.aiedge.examples.transcription.data.TranscriptionSession
+import com.google.aiedge.examples.transcription.view.ApplicationTheme
 import java.text.SimpleDateFormat
 import java.util.*
 

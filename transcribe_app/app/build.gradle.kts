@@ -7,8 +7,8 @@ plugins {
 
 kapt {
     javacOptions {
-        option("-J--add-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
-        option("-J--add-opens",   "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+        option("--add-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+        option("--add-opens", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
     }
 }
 
@@ -26,18 +26,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
 
     packaging {
